@@ -1,0 +1,319 @@
+2026-06-22T08:38:10.124Z [INFO] ----------------------invoke appmod-list-jdks----------------------
+2026-06-22T08:38:10.126Z [INFO] [Tool.invoke]({name: appmod-list-jdks, modelId: auto, input: {
+  "version": "21",
+  "projectPath": "d:\\sham\\Edupath"
+}}).
+2026-06-22T08:38:10.127Z [INFO] [Tool.invoke] do invoke.
+2026-06-22T08:38:10.162Z [INFO] [Tool.invoke]({result: {
+  "message": "No JDK installations found."
+}}).
+2026-06-22T08:38:10.163Z [INFO] ----------------------invoked appmod-list-jdks----------------------
+2026-06-22T08:38:16.480Z [INFO] ----------------------invoke appmod-list-jdks----------------------
+2026-06-22T08:38:16.482Z [INFO] [Tool.invoke]({name: appmod-list-jdks, modelId: auto, input: {
+  "projectPath": "d:\\sham\\Edupath"
+}}).
+2026-06-22T08:38:16.490Z [INFO] [Tool.invoke] do invoke.
+2026-06-22T08:38:16.528Z [INFO] [Tool.invoke]({result: {
+  "message": "We found following jdks in your system:\n\n1. Java 25.0.3\n   📁 Path: C:\\Program Files\\Eclipse Adoptium\\jdk-25.0.3.9-hotspot\\bin\n   🏷️ Source: PATH\n\n2. Java 26.0.1\n   📁 Path: C:\\Program Files\\Java\\jdk-26.0.1\\bin\n   🏷️ Source: others\n\nTotal: 2 JDK installation(s) found"
+}}).
+2026-06-22T08:38:16.529Z [INFO] ----------------------invoked appmod-list-jdks----------------------
+2026-06-22T08:38:22.243Z [INFO] ---------------------prepare appmod-list-mavens----------------------
+2026-06-22T08:38:22.245Z [INFO] [Tool.prepareInvocation]({name: appmod-list-mavens, input: {}}).
+2026-06-22T08:38:22.246Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-06-22T08:38:22.247Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "List mavens"
+}}).
+2026-06-22T08:38:22.250Z [INFO] ----------------------prepared appmod-list-mavens----------------------
+2026-06-22T08:38:22.358Z [INFO] ----------------------invoke appmod-list-mavens----------------------
+2026-06-22T08:38:22.359Z [INFO] [Tool.invoke]({name: appmod-list-mavens, modelId: auto, input: {
+  "projectPath": "d:\\sham\\Edupath"
+}}).
+2026-06-22T08:38:22.360Z [INFO] [Tool.invoke] do invoke.
+2026-06-22T08:38:22.369Z [INFO] [Tool.invoke]({result: {
+  "message": "No Maven installations found."
+}}).
+2026-06-22T08:38:22.370Z [INFO] ----------------------invoked appmod-list-mavens----------------------
+2026-06-22T08:38:33.450Z [INFO] ---------------------prepare appmod-report-event----------------------
+2026-06-22T08:38:33.451Z [INFO] [Tool.prepareInvocation]({name: appmod-report-event, input: {
+  "projectPath": "d:\\sham\\Edupath\\java",
+  "event": "precheckCompleted",
+  "phase": "precheck",
+  "status": "succeeded",
+  "details": {
+    "components": [
+      {
+        "name": "jdk",
+        "baseVersion": "17",
+        "targetVersion": "25"
+      }
+    ]
+  }
+}}).
+2026-06-22T08:38:33.451Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-06-22T08:38:33.452Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-06-22T08:38:33.453Z [INFO] ----------------------prepared appmod-report-event----------------------
+2026-06-22T08:38:33.518Z [INFO] ----------------------invoke appmod-report-event----------------------
+2026-06-22T08:38:33.518Z [INFO] [Tool.invoke]({name: appmod-report-event, modelId: auto, input: {
+  "projectPath": "d:\\sham\\Edupath\\java",
+  "event": "precheckCompleted",
+  "phase": "precheck",
+  "status": "succeeded",
+  "details": {
+    "components": [
+      {
+        "name": "jdk",
+        "baseVersion": "17",
+        "targetVersion": "25"
+      }
+    ]
+  }
+}}).
+2026-06-22T08:38:33.519Z [INFO] [Tool.invoke] do invoke.
+2026-06-22T08:38:33.521Z [INFO] Project d:\sham\Edupath is not a maven project, try to get java version from gradle
+2026-06-22T08:38:33.540Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'precheckCompleted' reported!\nSession ID: 20260622083810,\nSession Dir: d:\\sham\\Edupath\\.github\\modernize\\java-upgrade\\20260622083810"
+}}).
+2026-06-22T08:38:33.541Z [INFO] ----------------------invoked appmod-report-event----------------------
+2026-06-22T08:38:34.753Z [INFO] Try to get java version from gradle config files: 
+2026-06-22T08:38:34.755Z [INFO] Try to get java version from gradle properties: undefined
+2026-06-22T08:38:34.757Z [INFO] Project java version: 8
+2026-06-22T08:38:36.261Z [WARN] [ReportEventTool] Full project info unavailable, attempting lightweight fallback: UserError: Failed to detect build tool for the project at d:\sham\Edupath. There are child Maven/Gradle projects detected: "java". Would you like to use one of them instead?
+2026-06-22T08:38:36.265Z [INFO] Project d:\sham\Edupath is not a maven project, try to get java version from gradle
+2026-06-22T08:38:37.460Z [INFO] Try to get java version from gradle config files: 
+2026-06-22T08:38:37.462Z [INFO] Try to get java version from gradle properties: undefined
+2026-06-22T08:38:39.308Z [INFO] ---------------------prepare appmod-report-event----------------------
+2026-06-22T08:38:39.310Z [INFO] [Tool.prepareInvocation]({name: appmod-report-event, input: {
+  "event": "planGenerationStarted",
+  "phase": "plan",
+  "projectPath": "d:\\sham\\Edupath\\java",
+  "sessionId": "20260622083810",
+  "status": "succeeded"
+}}).
+2026-06-22T08:38:39.311Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-06-22T08:38:39.312Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-06-22T08:38:39.312Z [INFO] ----------------------prepared appmod-report-event----------------------
+2026-06-22T08:38:39.413Z [INFO] ----------------------invoke appmod-report-event----------------------
+2026-06-22T08:38:39.414Z [INFO] [Tool.invoke]({name: appmod-report-event, modelId: auto, input: {
+  "event": "planGenerationStarted",
+  "phase": "plan",
+  "projectPath": "d:\\sham\\Edupath\\java",
+  "sessionId": "20260622083810",
+  "status": "succeeded"
+}}).
+2026-06-22T08:38:39.415Z [INFO] [Tool.invoke] do invoke.
+2026-06-22T08:38:39.416Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'planGenerationStarted' reported!\nSession ID: 20260622083810,\nSession Dir: d:\\sham\\Edupath\\.github\\modernize\\java-upgrade\\20260622083810"
+}}).
+2026-06-22T08:38:39.416Z [INFO] ----------------------invoked appmod-report-event----------------------
+2026-06-22T08:39:11.183Z [INFO] ---------------------prepare appmod-report-event----------------------
+2026-06-22T08:39:11.184Z [INFO] [Tool.prepareInvocation]({name: appmod-report-event, input: {
+  "event": "planReviewed",
+  "phase": "plan",
+  "projectPath": "d:\\sham\\Edupath\\java",
+  "sessionId": "20260622083810",
+  "status": "succeeded"
+}}).
+2026-06-22T08:39:11.185Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-06-22T08:39:11.185Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-06-22T08:39:11.186Z [INFO] ----------------------prepared appmod-report-event----------------------
+2026-06-22T08:39:11.302Z [INFO] ----------------------invoke appmod-report-event----------------------
+2026-06-22T08:39:11.302Z [INFO] [Tool.invoke]({name: appmod-report-event, modelId: auto, input: {
+  "event": "planReviewed",
+  "phase": "plan",
+  "projectPath": "d:\\sham\\Edupath\\java",
+  "sessionId": "20260622083810",
+  "status": "succeeded"
+}}).
+2026-06-22T08:39:11.303Z [INFO] [Tool.invoke] do invoke.
+2026-06-22T08:39:11.306Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'planReviewed' reported!\nSession ID: 20260622083810,\nSession Dir: d:\\sham\\Edupath\\.github\\modernize\\java-upgrade\\20260622083810"
+}}).
+2026-06-22T08:39:11.306Z [INFO] ----------------------invoked appmod-report-event----------------------
+2026-06-22T08:39:18.879Z [INFO] ---------------------prepare appmod-confirm-upgrade-plan----------------------
+2026-06-22T08:39:18.881Z [INFO] [Tool.prepareInvocation]({name: appmod-confirm-upgrade-plan, input: {
+  "sessionId": "20260622083810"
+}}).
+2026-06-22T08:39:18.882Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-06-22T08:39:18.883Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Review [upgrade plan](file:///d:/sham/Edupath/.github/modernize/java-upgrade/20260622083810/plan.md)",
+  "confirmationMessages": {
+    "title": "Plan generated",
+    "message": "Please review the generated plan and make any necessary adjustments before proceeding. You can modify the generated [`plan.md`](file:///d:/sham/Edupath/.github/modernize/java-upgrade/20260622083810/plan.md) directly."
+  }
+}}).
+2026-06-22T08:39:18.884Z [INFO] ----------------------prepared appmod-confirm-upgrade-plan----------------------
+2026-06-22T08:39:26.140Z [INFO] ----------------------invoke appmod-confirm-upgrade-plan----------------------
+2026-06-22T08:39:26.141Z [INFO] [Tool.invoke]({name: appmod-confirm-upgrade-plan, modelId: auto, input: {
+  "sessionId": "20260622083810"
+}}).
+2026-06-22T08:39:26.141Z [INFO] [Tool.invoke] do invoke.
+2026-06-22T08:39:26.141Z [INFO] Upgrade plan confirmed successfully.
+2026-06-22T08:39:26.142Z [INFO] [Tool.invoke]({result: {
+  "message": "Generated plan is reviewed and confirmed by the user! the upgrade process will start now."
+}}).
+2026-06-22T08:39:26.142Z [INFO] ----------------------invoked appmod-confirm-upgrade-plan----------------------
+2026-06-22T08:39:33.070Z [INFO] ---------------------prepare appmod-report-event----------------------
+2026-06-22T08:39:33.071Z [INFO] [Tool.prepareInvocation]({name: appmod-report-event, input: {
+  "event": "planExecutionStarted",
+  "phase": "execute",
+  "projectPath": "d:\\sham\\Edupath\\java",
+  "sessionId": "20260622083810",
+  "status": "succeeded"
+}}).
+2026-06-22T08:39:33.071Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-06-22T08:39:33.072Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-06-22T08:39:33.073Z [INFO] ----------------------prepared appmod-report-event----------------------
+2026-06-22T08:39:33.140Z [INFO] ----------------------invoke appmod-report-event----------------------
+2026-06-22T08:39:33.142Z [INFO] [Tool.invoke]({name: appmod-report-event, modelId: auto, input: {
+  "event": "planExecutionStarted",
+  "phase": "execute",
+  "projectPath": "d:\\sham\\Edupath\\java",
+  "sessionId": "20260622083810",
+  "status": "succeeded"
+}}).
+2026-06-22T08:39:33.143Z [INFO] [Tool.invoke] do invoke.
+2026-06-22T08:39:33.218Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'planExecutionStarted' reported!\nSession ID: 20260622083810,\nSession Dir: d:\\sham\\Edupath\\.github\\modernize\\java-upgrade\\20260622083810"
+}}).
+2026-06-22T08:39:33.218Z [INFO] ----------------------invoked appmod-report-event----------------------
+2026-06-22T08:40:30.320Z [INFO] ---------------------prepare appmod-install-maven----------------------
+2026-06-22T08:40:30.321Z [INFO] [Tool.prepareInvocation]({name: appmod-install-maven, input: {
+  "sessionId": "20260622083810",
+  "version": "latest"
+}}).
+2026-06-22T08:40:30.321Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-06-22T08:40:43.173Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Download and install Maven"
+}}).
+2026-06-22T08:40:43.174Z [INFO] ----------------------prepared appmod-install-maven----------------------
+2026-06-22T08:40:43.324Z [INFO] ----------------------invoke appmod-install-maven----------------------
+2026-06-22T08:40:43.326Z [INFO] [Tool.invoke]({name: appmod-install-maven, modelId: auto, input: {
+  "sessionId": "20260622083810",
+  "version": "latest"
+}}).
+2026-06-22T08:40:43.326Z [INFO] [Tool.invoke] do invoke.
+2026-06-22T08:42:24.955Z [INFO] [Tool.invoke]({result: {
+  "result": {
+    "name": "mvn",
+    "path": "C:\\Users\\hpaid\\.maven\\maven-3.9.16\\bin",
+    "version": "3.9.16"
+  },
+  "message": "Maven latest is installed at C:\\Users\\hpaid\\.maven\\maven-3.9.16\\bin",
+  "telemetry": {
+    "tool": "Maven",
+    "version": "latest"
+  }
+}}).
+2026-06-22T08:42:24.956Z [INFO] ----------------------invoked appmod-install-maven----------------------
+2026-06-22T08:43:18.122Z [INFO] ---------------------prepare appmod-report-event----------------------
+2026-06-22T08:43:18.125Z [INFO] [Tool.prepareInvocation]({name: appmod-report-event, input: {
+  "details": {
+    "buildToolPath": "C:\\Users\\hpaid\\.maven\\maven-3.9.16\\bin\\mvn.cmd",
+    "jdkPath": "C:\\Program Files\\Eclipse Adoptium\\jdk-25.0.3.9-hotspot\\bin"
+  },
+  "event": "environmentSetup",
+  "phase": "execute",
+  "projectPath": "d:\\sham\\Edupath\\java",
+  "sessionId": "20260622083810",
+  "status": "succeeded"
+}}).
+2026-06-22T08:43:18.126Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-06-22T08:43:18.127Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-06-22T08:43:18.128Z [INFO] ----------------------prepared appmod-report-event----------------------
+2026-06-22T08:43:18.303Z [INFO] ----------------------invoke appmod-report-event----------------------
+2026-06-22T08:43:18.305Z [INFO] [Tool.invoke]({name: appmod-report-event, modelId: auto, input: {
+  "details": {
+    "buildToolPath": "C:\\Users\\hpaid\\.maven\\maven-3.9.16\\bin\\mvn.cmd",
+    "jdkPath": "C:\\Program Files\\Eclipse Adoptium\\jdk-25.0.3.9-hotspot\\bin"
+  },
+  "event": "environmentSetup",
+  "phase": "execute",
+  "projectPath": "d:\\sham\\Edupath\\java",
+  "sessionId": "20260622083810",
+  "status": "succeeded"
+}}).
+2026-06-22T08:43:18.308Z [INFO] [Tool.invoke] do invoke.
+2026-06-22T08:43:18.314Z [INFO] Project d:\sham\Edupath is not a maven project, try to get java version from gradle
+2026-06-22T08:43:18.358Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'environmentSetup' reported!\nSession ID: 20260622083810,\nSession Dir: d:\\sham\\Edupath\\.github\\modernize\\java-upgrade\\20260622083810"
+}}).
+2026-06-22T08:43:18.359Z [INFO] ----------------------invoked appmod-report-event----------------------
+2026-06-22T08:43:19.779Z [INFO] Try to get java version from gradle config files: 
+2026-06-22T08:43:19.781Z [INFO] Try to get java version from gradle properties: undefined
+2026-06-22T08:43:19.782Z [INFO] Project java version: 8
+2026-06-22T08:43:20.877Z [WARN] [ReportEventTool] Full project info unavailable, attempting lightweight fallback: UserError: Failed to detect build tool for the project at d:\sham\Edupath. There are child Maven/Gradle projects detected: "java". Would you like to use one of them instead?
+2026-06-22T08:43:20.884Z [INFO] Project d:\sham\Edupath is not a maven project, try to get java version from gradle
+2026-06-22T08:43:23.116Z [INFO] Try to get java version from gradle config files: 
+2026-06-22T08:43:23.118Z [INFO] Try to get java version from gradle properties: undefined
+2026-06-22T08:43:45.426Z [INFO] ---------------------prepare appmod-report-event----------------------
+2026-06-22T08:43:45.427Z [INFO] [Tool.prepareInvocation]({name: appmod-report-event, input: {
+  "event": "baselineSetup",
+  "phase": "execute",
+  "projectPath": "d:\\sham\\Edupath\\java",
+  "sessionId": "20260622083810",
+  "status": "skipped",
+  "message": "Base JDK 17 not available on system. Baseline compilation and testing skipped."
+}}).
+2026-06-22T08:43:45.428Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-06-22T08:43:45.429Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-06-22T08:43:45.430Z [INFO] ----------------------prepared appmod-report-event----------------------
+2026-06-22T08:43:45.730Z [INFO] ----------------------invoke appmod-report-event----------------------
+2026-06-22T08:43:45.731Z [INFO] [Tool.invoke]({name: appmod-report-event, modelId: auto, input: {
+  "event": "baselineSetup",
+  "phase": "execute",
+  "projectPath": "d:\\sham\\Edupath\\java",
+  "sessionId": "20260622083810",
+  "status": "skipped",
+  "message": "Base JDK 17 not available on system. Baseline compilation and testing skipped."
+}}).
+2026-06-22T08:43:45.734Z [INFO] [Tool.invoke] do invoke.
+2026-06-22T08:43:45.738Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'baselineSetup' reported!\nSession ID: 20260622083810,\nSession Dir: d:\\sham\\Edupath\\.github\\modernize\\java-upgrade\\20260622083810"
+}}).
+2026-06-22T08:43:45.739Z [INFO] ----------------------invoked appmod-report-event----------------------
+2026-06-22T08:44:14.782Z [INFO] ---------------------prepare appmod-report-event----------------------
+2026-06-22T08:44:14.784Z [INFO] [Tool.prepareInvocation]({name: appmod-report-event, input: {
+  "details": {
+    "stepNumber": 3,
+    "stepTitle": "Upgrade Java Version to 25"
+  },
+  "event": "upgradeStepStarted",
+  "phase": "execute",
+  "projectPath": "d:\\sham\\Edupath\\java",
+  "sessionId": "20260622083810",
+  "status": "succeeded"
+}}).
+2026-06-22T08:44:14.785Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-06-22T08:44:14.786Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-06-22T08:44:14.786Z [INFO] ----------------------prepared appmod-report-event----------------------
+2026-06-22T08:44:14.936Z [INFO] ----------------------invoke appmod-report-event----------------------
+2026-06-22T08:44:14.937Z [INFO] [Tool.invoke]({name: appmod-report-event, modelId: auto, input: {
+  "details": {
+    "stepNumber": 3,
+    "stepTitle": "Upgrade Java Version to 25"
+  },
+  "event": "upgradeStepStarted",
+  "phase": "execute",
+  "projectPath": "d:\\sham\\Edupath\\java",
+  "sessionId": "20260622083810",
+  "status": "succeeded"
+}}).
+2026-06-22T08:44:14.938Z [INFO] [Tool.invoke] do invoke.
+2026-06-22T08:44:14.942Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'upgradeStepStarted' reported!\nSession ID: 20260622083810,\nSession Dir: d:\\sham\\Edupath\\.github\\modernize\\java-upgrade\\20260622083810"
+}}).
+2026-06-22T08:44:14.945Z [INFO] ----------------------invoked appmod-report-event----------------------

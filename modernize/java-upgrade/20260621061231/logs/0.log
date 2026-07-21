@@ -1,0 +1,136 @@
+2026-06-21T06:12:31.698Z [INFO] ----------------------invoke appmod-list-jdks----------------------
+2026-06-21T06:12:31.703Z [INFO] [Tool.invoke]({name: appmod-list-jdks, modelId: auto, input: {
+  "sessionId": "",
+  "additionalSearchPaths": [
+    "c:\\Users\\hpaid\\OneDrive\\Documents\\Edupath",
+    "c:\\Program Files\\Java",
+    "c:\\Program Files (x86)\\Java"
+  ],
+  "version": "21",
+  "projectPath": "c:\\Users\\hpaid\\OneDrive\\Documents\\Edupath"
+}}).
+2026-06-21T06:12:31.704Z [INFO] [Tool.invoke] do invoke.
+2026-06-21T06:12:32.112Z [INFO] [Tool.invoke]({result: {
+  "message": "No JDK installations found."
+}}).
+2026-06-21T06:12:32.162Z [INFO] ----------------------invoked appmod-list-jdks----------------------
+2026-06-21T06:12:32.677Z [INFO] ----------------------invoke appmod-list-mavens----------------------
+2026-06-21T06:12:32.710Z [INFO] [Tool.invoke]({name: appmod-list-mavens, modelId: auto, input: {
+  "sessionId": "",
+  "additionalSearchPaths": [
+    "c:\\Users\\hpaid\\OneDrive\\Documents\\Edupath",
+    "c:\\Program Files\\apache-maven",
+    "c:\\Program Files (x86)\\apache-maven"
+  ],
+  "includeVersion": true,
+  "projectPath": "c:\\Users\\hpaid\\OneDrive\\Documents\\Edupath"
+}}).
+2026-06-21T06:12:32.761Z [INFO] [Tool.invoke] do invoke.
+2026-06-21T06:12:32.886Z [INFO] [Tool.invoke]({result: {
+  "message": "No Maven installations found."
+}}).
+2026-06-21T06:12:32.892Z [INFO] ----------------------invoked appmod-list-mavens----------------------
+2026-06-21T06:12:42.448Z [INFO] ---------------------prepare appmod-report-event----------------------
+2026-06-21T06:12:42.449Z [INFO] [Tool.prepareInvocation]({name: appmod-report-event, input: {
+  "projectPath": "c:\\Users\\hpaid\\OneDrive\\Documents\\Edupath",
+  "event": "precheckCompleted",
+  "phase": "precheck",
+  "status": "succeeded",
+  "details": {
+    "components": [
+      {
+        "name": "jdk",
+        "baseVersion": "17",
+        "targetVersion": "21"
+      }
+    ]
+  },
+  "message": "Detected Maven Java project; upgrading runtime from Java 17 to Java 21."
+}}).
+2026-06-21T06:12:42.451Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-06-21T06:12:42.452Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-06-21T06:12:42.455Z [INFO] ----------------------prepared appmod-report-event----------------------
+2026-06-21T06:12:42.587Z [INFO] ----------------------invoke appmod-report-event----------------------
+2026-06-21T06:12:42.588Z [INFO] [Tool.invoke]({name: appmod-report-event, modelId: auto, input: {
+  "projectPath": "c:\\Users\\hpaid\\OneDrive\\Documents\\Edupath",
+  "event": "precheckCompleted",
+  "phase": "precheck",
+  "status": "succeeded",
+  "details": {
+    "components": [
+      {
+        "name": "jdk",
+        "baseVersion": "17",
+        "targetVersion": "21"
+      }
+    ]
+  },
+  "message": "Detected Maven Java project; upgrading runtime from Java 17 to Java 21."
+}}).
+2026-06-21T06:12:42.598Z [INFO] [Tool.invoke] do invoke.
+2026-06-21T06:12:42.601Z [INFO] Project c:\Users\hpaid\OneDrive\Documents\Edupath is not a maven project, try to get java version from gradle
+2026-06-21T06:12:42.629Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'precheckCompleted' reported!\nSession ID: 20260621061231,\nSession Dir: c:\\Users\\hpaid\\OneDrive\\Documents\\Edupath\\.github\\modernize\\java-upgrade\\20260621061231"
+}}).
+2026-06-21T06:12:42.630Z [INFO] ----------------------invoked appmod-report-event----------------------
+2026-06-21T06:12:48.682Z [INFO] Try to get java version from gradle config files: 
+2026-06-21T06:12:48.685Z [INFO] Try to get java version from gradle properties: undefined
+2026-06-21T06:12:48.688Z [INFO] Project java version: 8
+2026-06-21T06:12:50.197Z [WARN] [ReportEventTool] Full project info unavailable, attempting lightweight fallback: UserError: Failed to detect build tool for the project at c:\Users\hpaid\OneDrive\Documents\Edupath. There are child Maven/Gradle projects detected: "java". Would you like to use one of them instead?
+2026-06-21T06:12:50.201Z [INFO] Project c:\Users\hpaid\OneDrive\Documents\Edupath is not a maven project, try to get java version from gradle
+2026-06-21T06:12:51.729Z [INFO] Try to get java version from gradle config files: 
+2026-06-21T06:12:51.736Z [INFO] Try to get java version from gradle properties: undefined
+2026-06-21T06:13:23.883Z [INFO] ---------------------prepare appmod-report-event----------------------
+2026-06-21T06:13:23.884Z [INFO] [Tool.prepareInvocation]({name: appmod-report-event, input: {
+  "sessionId": "20260621061231",
+  "projectPath": "c:\\Users\\hpaid\\OneDrive\\Documents\\Edupath",
+  "event": "planGenerationStarted",
+  "phase": "plan",
+  "status": "succeeded"
+}}).
+2026-06-21T06:13:23.885Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-06-21T06:13:23.886Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-06-21T06:13:23.887Z [INFO] ----------------------prepared appmod-report-event----------------------
+2026-06-21T06:13:24.022Z [INFO] ----------------------invoke appmod-report-event----------------------
+2026-06-21T06:13:24.023Z [INFO] [Tool.invoke]({name: appmod-report-event, modelId: auto, input: {
+  "sessionId": "20260621061231",
+  "projectPath": "c:\\Users\\hpaid\\OneDrive\\Documents\\Edupath",
+  "event": "planGenerationStarted",
+  "phase": "plan",
+  "status": "succeeded"
+}}).
+2026-06-21T06:13:24.026Z [INFO] [Tool.invoke] do invoke.
+2026-06-21T06:13:24.030Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'planGenerationStarted' reported!\nSession ID: 20260621061231,\nSession Dir: c:\\Users\\hpaid\\OneDrive\\Documents\\Edupath\\.github\\modernize\\java-upgrade\\20260621061231"
+}}).
+2026-06-21T06:13:24.031Z [INFO] ----------------------invoked appmod-report-event----------------------
+2026-06-21T06:15:08.456Z [INFO] ---------------------prepare appmod-report-event----------------------
+2026-06-21T06:15:08.458Z [INFO] [Tool.prepareInvocation]({name: appmod-report-event, input: {
+  "sessionId": "20260621061231",
+  "projectPath": "c:\\Users\\hpaid\\OneDrive\\Documents\\Edupath",
+  "event": "planReviewed",
+  "phase": "plan",
+  "status": "succeeded"
+}}).
+2026-06-21T06:15:08.460Z [INFO] [Tool.prepareInvocation] do prepare invocation.
+2026-06-21T06:15:08.461Z [INFO] [Tool.prepareInvocation]({result: {
+  "invocationMessage": "Report upgrade event"
+}}).
+2026-06-21T06:15:08.462Z [INFO] ----------------------prepared appmod-report-event----------------------
+2026-06-21T06:15:08.637Z [INFO] ----------------------invoke appmod-report-event----------------------
+2026-06-21T06:15:08.640Z [INFO] [Tool.invoke]({name: appmod-report-event, modelId: auto, input: {
+  "sessionId": "20260621061231",
+  "projectPath": "c:\\Users\\hpaid\\OneDrive\\Documents\\Edupath",
+  "event": "planReviewed",
+  "phase": "plan",
+  "status": "succeeded"
+}}).
+2026-06-21T06:15:08.641Z [INFO] [Tool.invoke] do invoke.
+2026-06-21T06:15:08.645Z [INFO] [Tool.invoke]({result: {
+  "message": "Event 'planReviewed' reported!\nSession ID: 20260621061231,\nSession Dir: c:\\Users\\hpaid\\OneDrive\\Documents\\Edupath\\.github\\modernize\\java-upgrade\\20260621061231"
+}}).
+2026-06-21T06:15:08.647Z [INFO] ----------------------invoked appmod-report-event----------------------
