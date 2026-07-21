@@ -1,40 +1,34 @@
-<p align="center">
-  <a href="https://tailwindcss.com" target="_blank">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/tailwindlabs/tailwindcss/HEAD/.github/logo-dark.svg">
-      <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/tailwindlabs/tailwindcss/HEAD/.github/logo-light.svg">
-      <img alt="Tailwind CSS" src="https://raw.githubusercontent.com/tailwindlabs/tailwindcss/HEAD/.github/logo-light.svg" width="350" height="70" style="max-width: 100%;">
-    </picture>
-  </a>
-</p>
+# react-transition-group [![npm][npm-badge]][npm]
 
-<p align="center">
-  A utility-first CSS framework for rapidly building custom user interfaces.
-</p>
+> **ATTENTION!** To address many issues that have come up over the years, the API in v2 and above is not backwards compatible with the original [`React addon (v1-stable)`](https://github.com/reactjs/react-transition-group/tree/v1-stable).
+>
+> **For a drop-in replacement for `react-addons-transition-group` and `react-addons-css-transition-group`, use the v1 release. Documentation and code for that release are available on the [`v1-stable`](https://github.com/reactjs/react-transition-group/tree/v1-stable) branch.**
+>
+> We are no longer updating the v1 codebase, please upgrade to the latest version when possible
 
-<p align="center">
-    <a href="https://github.com/tailwindlabs/tailwindcss/actions"><img src="https://img.shields.io/github/actions/workflow/status/tailwindlabs/tailwindcss/ci.yml?branch=main" alt="Build Status"></a>
-    <a href="https://www.npmjs.com/package/tailwindcss"><img src="https://img.shields.io/npm/dt/tailwindcss.svg" alt="Total Downloads"></a>
-    <a href="https://github.com/tailwindcss/tailwindcss/releases"><img src="https://img.shields.io/npm/v/tailwindcss.svg" alt="Latest Release"></a>
-    <a href="https://github.com/tailwindcss/tailwindcss/blob/main/LICENSE"><img src="https://img.shields.io/npm/l/tailwindcss.svg" alt="License"></a>
-</p>
-
----
+A set of components for managing component states (including mounting and unmounting) over time, specifically designed with animation in mind.
 
 ## Documentation
 
-For full documentation, visit [tailwindcss.com](https://tailwindcss.com/).
+- [**Main documentation**](https://reactcommunity.org/react-transition-group/)
+- [Migration guide from v1](/Migration.md)
 
-## Community
+## TypeScript
+TypeScript definitions are published via [**DefinitelyTyped**](https://github.com/DefinitelyTyped/DefinitelyTyped) and can be installed via the following command:
 
-For help, discussion about best practices, or any other conversation that would benefit from being searchable:
+```
+npm install @types/react-transition-group
+```
 
-[Discuss Tailwind CSS on GitHub](https://github.com/tailwindcss/tailwindcss/discussions)
+## Examples
 
-For casual chit-chat with others using the framework:
+Clone the repo first:
 
-[Join the Tailwind CSS Discord Server](https://discord.gg/7NF8GNe)
+```
+git@github.com:reactjs/react-transition-group.git
+```
 
-## Contributing
+Then run `npm install` (or `yarn`), and finally `npm run storybook` to start a storybook instance that you can navigate to in your browser to see the examples.
 
-If you're interested in contributing to Tailwind CSS, please read our [contributing docs](https://github.com/tailwindcss/tailwindcss/blob/main/.github/CONTRIBUTING.md) **before submitting a pull request**.
+[npm-badge]: https://img.shields.io/npm/v/react-transition-group.svg
+[npm]: https://www.npmjs.org/package/react-transition-group
