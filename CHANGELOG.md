@@ -1,22 +1,259 @@
-# Changelog
+## 3.0.0 / 2023-10-18
 
-All notable changes to this project will be documented in this file.
+### refactor / chore
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+- upgrade dependencies
 
-## v1.0.0 - 2022-01-02
+# BREAKING CHANGE
 
-### Commits
+Remove some unused/unneeded code which drops support for older browser versions. Results in slightly decreased bundle size.
 
-- Tests [`e2f59ad`](https://github.com/inspect-js/node-supports-preserve-symlinks-flag/commit/e2f59ad74e2ae0f5f4899fcde6a6f693ab7cc074)
-- Initial commit [`dc222aa`](https://github.com/inspect-js/node-supports-preserve-symlinks-flag/commit/dc222aad3c0b940d8d3af1ca9937d108bd2dc4b9)
-- [meta] do not publish workflow files [`5ef77f7`](https://github.com/inspect-js/node-supports-preserve-symlinks-flag/commit/5ef77f7cb6946d16ee38672be9ec0f1bbdf63262)
-- npm init [`992b068`](https://github.com/inspect-js/node-supports-preserve-symlinks-flag/commit/992b068503a461f7e8676f40ca2aab255fd8d6ff)
-- read me [`6c9afa9`](https://github.com/inspect-js/node-supports-preserve-symlinks-flag/commit/6c9afa9fabc8eaf0814aaed6dd01e6df0931b76d)
-- Initial implementation [`2f98925`](https://github.com/inspect-js/node-supports-preserve-symlinks-flag/commit/2f9892546396d4ab0ad9f1ff83e76c3f01234ae8)
-- [meta] add `auto-changelog` [`6c476ae`](https://github.com/inspect-js/node-supports-preserve-symlinks-flag/commit/6c476ae1ed7ce68b0480344f090ac2844f35509d)
-- [Dev Deps] add `eslint`, `@ljharb/eslint-config` [`d0fffc8`](https://github.com/inspect-js/node-supports-preserve-symlinks-flag/commit/d0fffc886d25fba119355520750a909d64da0087)
-- Only apps should have lockfiles [`ab318ed`](https://github.com/inspect-js/node-supports-preserve-symlinks-flag/commit/ab318ed7ae62f6c2c0e80a50398d40912afd8f69)
-- [meta] add `safe-publish-latest` [`2bb23b3`](https://github.com/inspect-js/node-supports-preserve-symlinks-flag/commit/2bb23b3ebab02dc4135c4cdf0217db82835b9fca)
-- [meta] add `sideEffects` flag [`600223b`](https://github.com/inspect-js/node-supports-preserve-symlinks-flag/commit/600223ba24f30779f209d9097721eff35ed62741)
+- remove unneeded polyfill for translateStyle - [browser support since 2017](https://caniuse.com/?search=transforms)
+- remove unneeded polyfill for `Number.isFinite` - [browser support since 2015](https://caniuse.com/?search=Number.isFinite) AND polyfilled by babel/core-js
+
+## 2.0.5 / 2023-10-10
+
+### fix
+
+- Check if `requestAnimationFrame` is defined in shouldUpdate
+
+## 2.0.4 / 2023-09-12
+
+### fix
+
+- call `onAnimationEnd` on unmount
+
+## 2.0.3 / 2023-05-08
+
+### fix
+
+- treat `duration={0}` as if animation is not active by doing a check and returning early. This fixes a bug where NaN can cause a crash in the browser.
+
+## 2.0.2 / 2023-02-23
+
+### chore
+
+- upgrade `fast-equals` to latest. No breaking changes - see https://github.com/planttheidea/fast-equals/blob/master/CHANGELOG.md
+- don't upgrade `react-transition-group` in minor release as this requires dropping support for react <16.6
+- upgrade devDependencies
+- update babel config
+- update deprecated eslint parser
+
+## 2.0.1 / 2022-06-27
+
+### feat
+
+- feat: allow React 18
+- Remove raf polyfill for IE9
+
+## 2.0.0 / 2021-03-21
+
+### chore (#48)
+
+- Changed peerDeps to react 15,16,17
+- Removed karma,chai,enzyme blablabla... and used only Jest and Testing-Library.
+- Updated devDependencies and cleared some.
+
+## 1.0.2 / 2018-10-02
+
+### fix
+
+- fix babelrc
+
+## 1.0.1 / 2018-10-02
+
+### fix
+
+- update babel, webpack, karma, etc.
+- fix import error
+
+## 1.0.0 / 2017-11-06
+
+### feat
+
+- Support React 16
+
+## 0.1.17 / 2016-12-02
+
+### fix
+
+- change scripts
+
+## 0.1.16 / 2016-11-25
+
+### fix
+
+- update lodash
+
+## 0.1.15 / 2016-10-31
+
+### fix
+
+- fix isMounted to mounted
+
+## 0.1.14 / 2016-10-28
+
+### fix
+
+- fix: judge isMounted
+
+## 0.1.12-0.1.13 / 2016-10-27
+
+### fix
+
+- fix script
+
+## 0.1.10 / 2016-07-07
+
+### fix
+
+- add onAnimationReStart validation
+
+## 0.1.8-0.1.9 / 2016-05-05
+
+### feat
+
+- add onAniamtionStart prop
+
+## 0.1.7 / 2016-04-21
+
+### fix
+
+- fix Animate trigger animate when isActive is false
+
+## 0.1.6 / 2016-04-15
+
+### fix
+
+- fix Animate not pipe props when Animate not active
+
+## 0.1.5 / 2016-04-13
+
+### fix
+
+- remove pure-render-decorator
+
+## 0.1.4 / 2016-04-12
+
+### fix
+
+- change transition-group addons to dependencies
+
+## 0.1.3 / 2016-04-12
+
+### refactor
+
+- refactor AnimateManager
+
+## 0.1.2 / 2016-04-12
+
+### feat
+
+- use owe PureRender util
+
+### fix
+
+- update react to 15.0.0
+
+## 0.1.1 / 2016-04-05
+
+### feat
+
+- add shouldReAnimate prop
+
+## 0.1.0 / 2016-03-16
+
+### feat
+
+- use webpack 2
+
+## 0.0.13-0.0.15 / 2016-03-15
+
+### fix
+
+- using isEqual in lodash and remove isEqual in utils
+
+## 0.0.13-0.0.14 / 2016-03-15
+
+### fix
+
+- fix update animation judgement
+
+## 0.0.12 / 2016-03-15
+
+### fix
+
+- fix compatable prefix in transition property
+
+### refactor
+
+- refactor some function in utils
+- using JSX instead of createElement
+
+## 0.0.11 / 2016-03-01
+
+### fix
+
+- fix haven't unsubscribe handleStyleChange
+
+## 0.0.10 / 2016-02-17
+
+### refactor
+
+- remove lodash compose method
+- refactor configUpdate.js
+
+## 0.0.9 / 2016-02-05
+
+### fix
+
+- fix don't build on npm publish
+
+## 0.0.8 / 2016-02-05
+
+### fix
+
+- fix lodash minify problem
+
+## 0.0.7 / 2016-02-04
+
+### fix
+
+- optimize npm script commands
+
+## 0.0.6 / 2016-02-04
+
+### fix
+
+- set min time longer
+
+## 0.0.5 / 2016-02-04
+
+### fix
+
+- fix animation not valid for set css styles too quick.
+
+## 0.0.4 / 2016-02-02
+
+### fix
+
+- support onAnimationEnd in js animation
+
+## 0.0.3 / 2016-02-02
+
+### refactor
+
+- refactor the import path of lodash function
+- update webpack.config.js
+
+## 0.0.2 / 2016-02-02
+
+### feat
+
+- support js animation
+- support bezier and spring timing function
+- support group animation
+
+## 0.0.1 / 2016-01-21
+
+- Init the project

@@ -1,34 +1,104 @@
-# react-transition-group [![npm][npm-badge]][npm]
+# `react-is`
 
-> **ATTENTION!** To address many issues that have come up over the years, the API in v2 and above is not backwards compatible with the original [`React addon (v1-stable)`](https://github.com/reactjs/react-transition-group/tree/v1-stable).
->
-> **For a drop-in replacement for `react-addons-transition-group` and `react-addons-css-transition-group`, use the v1 release. Documentation and code for that release are available on the [`v1-stable`](https://github.com/reactjs/react-transition-group/tree/v1-stable) branch.**
->
-> We are no longer updating the v1 codebase, please upgrade to the latest version when possible
+This package allows you to test arbitrary values and see if they're a particular React element type.
 
-A set of components for managing component states (including mounting and unmounting) over time, specifically designed with animation in mind.
+## Installation
 
-## Documentation
+```sh
+# Yarn
+yarn add react-is
 
-- [**Main documentation**](https://reactcommunity.org/react-transition-group/)
-- [Migration guide from v1](/Migration.md)
-
-## TypeScript
-TypeScript definitions are published via [**DefinitelyTyped**](https://github.com/DefinitelyTyped/DefinitelyTyped) and can be installed via the following command:
-
-```
-npm install @types/react-transition-group
+# NPM
+npm install react-is
 ```
 
-## Examples
+## Usage
 
-Clone the repo first:
+### Determining if a Component is Valid
 
+```js
+import React from "react";
+import * as ReactIs from "react-is";
+
+class ClassComponent extends React.Component {
+  render() {
+    return React.createElement("div");
+  }
+}
+
+const FunctionComponent = () => React.createElement("div");
+
+const ForwardRefComponent = React.forwardRef((props, ref) =>
+  React.createElement(Component, { forwardedRef: ref, ...props })
+);
+
+const Context = React.createContext(false);
+
+ReactIs.isValidElementType("div"); // true
+ReactIs.isValidElementType(ClassComponent); // true
+ReactIs.isValidElementType(FunctionComponent); // true
+ReactIs.isValidElementType(ForwardRefComponent); // true
+ReactIs.isValidElementType(Context.Provider); // true
+ReactIs.isValidElementType(Context.Consumer); // true
+ReactIs.isValidElementType(React.createFactory("div")); // true
 ```
-git@github.com:reactjs/react-transition-group.git
+
+### Determining an Element's Type
+
+#### Context
+
+```js
+import React from "react";
+import * as ReactIs from 'react-is';
+
+const ThemeContext = React.createContext("blue");
+
+ReactIs.isContextConsumer(<ThemeContext.Consumer />); // true
+ReactIs.isContextProvider(<ThemeContext.Provider />); // true
+ReactIs.typeOf(<ThemeContext.Provider />) === ReactIs.ContextProvider; // true
+ReactIs.typeOf(<ThemeContext.Consumer />) === ReactIs.ContextConsumer; // true
 ```
 
-Then run `npm install` (or `yarn`), and finally `npm run storybook` to start a storybook instance that you can navigate to in your browser to see the examples.
+#### Element
 
-[npm-badge]: https://img.shields.io/npm/v/react-transition-group.svg
-[npm]: https://www.npmjs.org/package/react-transition-group
+```js
+import React from "react";
+import * as ReactIs from 'react-is';
+
+ReactIs.isElement(<div />); // true
+ReactIs.typeOf(<div />) === ReactIs.Element; // true
+```
+
+#### Fragment
+
+```js
+import React from "react";
+import * as ReactIs from 'react-is';
+
+ReactIs.isFragment(<></>); // true
+ReactIs.typeOf(<></>) === ReactIs.Fragment; // true
+```
+
+#### Portal
+
+```js
+import React from "react";
+import ReactDOM from "react-dom";
+import * as ReactIs from 'react-is';
+
+const div = document.createElement("div");
+const portal = ReactDOM.createPortal(<div />, div);
+
+ReactIs.isPortal(portal); // true
+ReactIs.typeOf(portal) === ReactIs.Portal; // true
+```
+
+#### StrictMode
+
+```js
+import React from "react";
+import * as ReactIs from 'react-is';
+
+ReactIs.isStrictMode(<React.StrictMode />); // true
+ReactIs.typeOf(<React.StrictMode />) === ReactIs.StrictMode; // true
+```
