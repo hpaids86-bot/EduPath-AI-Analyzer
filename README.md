@@ -1,104 +1,37 @@
-# `react-is`
+# `react`
 
-This package allows you to test arbitrary values and see if they're a particular React element type.
+React is a JavaScript library for creating user interfaces.
 
-## Installation
+The `react` package contains only the functionality necessary to define React components. It is typically used together with a React renderer like `react-dom` for the web, or `react-native` for the native environments.
 
-```sh
-# Yarn
-yarn add react-is
-
-# NPM
-npm install react-is
-```
+**Note:** by default, React will be in development mode. The development version includes extra warnings about common mistakes, whereas the production version includes extra performance optimizations and strips all error messages. Don't forget to use the [production build](https://reactjs.org/docs/optimizing-performance.html#use-the-production-build) when deploying your application.
 
 ## Usage
 
-### Determining if a Component is Valid
-
 ```js
-import React from "react";
-import * as ReactIs from "react-is";
+import { useState } from 'react';
+import { createRoot } from 'react-dom/client';
 
-class ClassComponent extends React.Component {
-  render() {
-    return React.createElement("div");
-  }
+function Counter() {
+  const [count, setCount] = useState(0);
+  return (
+    <>
+      <h1>{count}</h1>
+      <button onClick={() => setCount(count + 1)}>
+        Increment
+      </button>
+    </>
+  );
 }
 
-const FunctionComponent = () => React.createElement("div");
-
-const ForwardRefComponent = React.forwardRef((props, ref) =>
-  React.createElement(Component, { forwardedRef: ref, ...props })
-);
-
-const Context = React.createContext(false);
-
-ReactIs.isValidElementType("div"); // true
-ReactIs.isValidElementType(ClassComponent); // true
-ReactIs.isValidElementType(FunctionComponent); // true
-ReactIs.isValidElementType(ForwardRefComponent); // true
-ReactIs.isValidElementType(Context.Provider); // true
-ReactIs.isValidElementType(Context.Consumer); // true
-ReactIs.isValidElementType(React.createFactory("div")); // true
+const root = createRoot(document.getElementById('root'));
+root.render(<App />);
 ```
 
-### Determining an Element's Type
+## Documentation
 
-#### Context
+See https://reactjs.org/
 
-```js
-import React from "react";
-import * as ReactIs from 'react-is';
+## API
 
-const ThemeContext = React.createContext("blue");
-
-ReactIs.isContextConsumer(<ThemeContext.Consumer />); // true
-ReactIs.isContextProvider(<ThemeContext.Provider />); // true
-ReactIs.typeOf(<ThemeContext.Provider />) === ReactIs.ContextProvider; // true
-ReactIs.typeOf(<ThemeContext.Consumer />) === ReactIs.ContextConsumer; // true
-```
-
-#### Element
-
-```js
-import React from "react";
-import * as ReactIs from 'react-is';
-
-ReactIs.isElement(<div />); // true
-ReactIs.typeOf(<div />) === ReactIs.Element; // true
-```
-
-#### Fragment
-
-```js
-import React from "react";
-import * as ReactIs from 'react-is';
-
-ReactIs.isFragment(<></>); // true
-ReactIs.typeOf(<></>) === ReactIs.Fragment; // true
-```
-
-#### Portal
-
-```js
-import React from "react";
-import ReactDOM from "react-dom";
-import * as ReactIs from 'react-is';
-
-const div = document.createElement("div");
-const portal = ReactDOM.createPortal(<div />, div);
-
-ReactIs.isPortal(portal); // true
-ReactIs.typeOf(portal) === ReactIs.Portal; // true
-```
-
-#### StrictMode
-
-```js
-import React from "react";
-import * as ReactIs from 'react-is';
-
-ReactIs.isStrictMode(<React.StrictMode />); // true
-ReactIs.typeOf(<React.StrictMode />) === ReactIs.StrictMode; // true
-```
+See https://reactjs.org/docs/react-api.html
