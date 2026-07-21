@@ -1,16 +1,11 @@
 
-1.0.2 / 2015-10-07
+3.3.1 / 2020-06-18
 ==================
 
-  * use try/catch when checking `localStorage` (#3, @kumavis)
+**fixes**
+  * [[`0d94a24`](http://github.com/thenables/thenify/commit/0d94a24eb933bc835d568f3009f4d269c4c4c17a)] - fix: remove eval (#30) (Yiyu He <<dead_horse@qq.com>>)
 
-1.0.1 / 2014-11-25
+3.3.0 / 2017-05-19
 ==================
 
-  * browser: use `console.warn()` for deprecation calls
-  * browser: more jsdocs
-
-1.0.0 / 2014-04-30
-==================
-
-  * initial commit
+  * feat: support options.multiArgs and options.withCallback (#27)

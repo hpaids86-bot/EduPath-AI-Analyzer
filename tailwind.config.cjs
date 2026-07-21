@@ -1,2 +1,2 @@
 /** @type {import('tailwindcss').Config} */
-export default __CONFIG__
+module.exports = __CONFIG__

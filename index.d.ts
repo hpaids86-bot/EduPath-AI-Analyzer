@@ -1,6 +1,11 @@
-/**
- * Run update and print output to terminal.
- */
-declare function updateDb(print?: (str: string) => void): void
+import type { PluginCreator } from 'postcss'
+import type { Config } from './config.d'
 
-export = updateDb
+declare const plugin: PluginCreator<string | Config | { config: string | Config }>
+
+declare type _Config = Config
+declare namespace plugin {
+  export type { _Config as Config }
+}
+
+export = plugin

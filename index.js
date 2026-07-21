@@ -1,288 +1,216 @@
-/*!
- * to-regex-range <https://github.com/micromatch/to-regex-range>
- *
- * Copyright (c) 2015-present, Jon Schlinkert.
- * Released under the MIT License.
- */
+#!/usr/bin/env node
 
-'use strict';
+import path from 'path'
+import arg from 'arg'
+import fs from 'fs'
 
-const isNumber = require('is-number');
+import { build } from './build'
+import { help } from './help'
+import { init } from './init'
 
-const toRegexRange = (min, max, options) => {
-  if (isNumber(min) === false) {
-    throw new TypeError('toRegexRange: expected the first argument to be a number');
-  }
-
-  if (max === void 0 || min === max) {
-    return String(min);
-  }
-
-  if (isNumber(max) === false) {
-    throw new TypeError('toRegexRange: expected the second argument to be a number.');
-  }
-
-  let opts = { relaxZeros: true, ...options };
-  if (typeof opts.strictZeros === 'boolean') {
-    opts.relaxZeros = opts.strictZeros === false;
-  }
-
-  let relax = String(opts.relaxZeros);
-  let shorthand = String(opts.shorthand);
-  let capture = String(opts.capture);
-  let wrap = String(opts.wrap);
-  let cacheKey = min + ':' + max + '=' + relax + shorthand + capture + wrap;
-
-  if (toRegexRange.cache.hasOwnProperty(cacheKey)) {
-    return toRegexRange.cache[cacheKey].result;
-  }
-
-  let a = Math.min(min, max);
-  let b = Math.max(min, max);
-
-  if (Math.abs(a - b) === 1) {
-    let result = min + '|' + max;
-    if (opts.capture) {
-      return `(${result})`;
-    }
-    if (opts.wrap === false) {
-      return result;
-    }
-    return `(?:${result})`;
-  }
-
-  let isPadded = hasPadding(min) || hasPadding(max);
-  let state = { min, max, a, b };
-  let positives = [];
-  let negatives = [];
-
-  if (isPadded) {
-    state.isPadded = isPadded;
-    state.maxLen = String(state.max).length;
-  }
-
-  if (a < 0) {
-    let newMin = b < 0 ? Math.abs(b) : 1;
-    negatives = splitToPatterns(newMin, Math.abs(a), state, opts);
-    a = state.a = 0;
-  }
-
-  if (b >= 0) {
-    positives = splitToPatterns(a, b, state, opts);
-  }
-
-  state.negatives = negatives;
-  state.positives = positives;
-  state.result = collatePatterns(negatives, positives, opts);
-
-  if (opts.capture === true) {
-    state.result = `(${state.result})`;
-  } else if (opts.wrap !== false && (positives.length + negatives.length) > 1) {
-    state.result = `(?:${state.result})`;
-  }
-
-  toRegexRange.cache[cacheKey] = state;
-  return state.result;
-};
-
-function collatePatterns(neg, pos, options) {
-  let onlyNegative = filterPatterns(neg, pos, '-', false, options) || [];
-  let onlyPositive = filterPatterns(pos, neg, '', false, options) || [];
-  let intersected = filterPatterns(neg, pos, '-?', true, options) || [];
-  let subpatterns = onlyNegative.concat(intersected).concat(onlyPositive);
-  return subpatterns.join('|');
-}
-
-function splitToRanges(min, max) {
-  let nines = 1;
-  let zeros = 1;
-
-  let stop = countNines(min, nines);
-  let stops = new Set([max]);
-
-  while (min <= stop && stop <= max) {
-    stops.add(stop);
-    nines += 1;
-    stop = countNines(min, nines);
-  }
-
-  stop = countZeros(max + 1, zeros) - 1;
-
-  while (min < stop && stop <= max) {
-    stops.add(stop);
-    zeros += 1;
-    stop = countZeros(max + 1, zeros) - 1;
-  }
-
-  stops = [...stops];
-  stops.sort(compare);
-  return stops;
-}
-
-/**
- * Convert a range to a regex pattern
- * @param {Number} `start`
- * @param {Number} `stop`
- * @return {String}
- */
-
-function rangeToPattern(start, stop, options) {
-  if (start === stop) {
-    return { pattern: start, count: [], digits: 0 };
-  }
-
-  let zipped = zip(start, stop);
-  let digits = zipped.length;
-  let pattern = '';
-  let count = 0;
-
-  for (let i = 0; i < digits; i++) {
-    let [startDigit, stopDigit] = zipped[i];
-
-    if (startDigit === stopDigit) {
-      pattern += startDigit;
-
-    } else if (startDigit !== '0' || stopDigit !== '9') {
-      pattern += toCharacterClass(startDigit, stopDigit, options);
-
-    } else {
-      count++;
-    }
-  }
-
-  if (count) {
-    pattern += options.shorthand === true ? '\\d' : '[0-9]';
-  }
-
-  return { pattern, count: [count], digits };
-}
-
-function splitToPatterns(min, max, tok, options) {
-  let ranges = splitToRanges(min, max);
-  let tokens = [];
-  let start = min;
-  let prev;
-
-  for (let i = 0; i < ranges.length; i++) {
-    let max = ranges[i];
-    let obj = rangeToPattern(String(start), String(max), options);
-    let zeros = '';
-
-    if (!tok.isPadded && prev && prev.pattern === obj.pattern) {
-      if (prev.count.length > 1) {
-        prev.count.pop();
+function oneOf(...options) {
+  return Object.assign(
+    (value = true) => {
+      for (let option of options) {
+        let parsed = option(value)
+        if (parsed === value) {
+          return parsed
+        }
       }
 
-      prev.count.push(obj.count[0]);
-      prev.string = prev.pattern + toQuantifier(prev.count);
-      start = max + 1;
-      continue;
+      throw new Error('...')
+    },
+    { manualParsing: true }
+  )
+}
+
+let commands = {
+  init: {
+    run: init,
+    args: {
+      '--esm': { type: Boolean, description: `Initialize configuration file as ESM` },
+      '--ts': { type: Boolean, description: `Initialize configuration file as TypeScript` },
+      '--postcss': { type: Boolean, description: `Initialize a \`postcss.config.js\` file` },
+      '--full': {
+        type: Boolean,
+        description: `Include the default values for all options in the generated configuration file`,
+      },
+      '-f': '--full',
+      '-p': '--postcss',
+    },
+  },
+  build: {
+    run: build,
+    args: {
+      '--input': { type: String, description: 'Input file' },
+      '--output': { type: String, description: 'Output file' },
+      '--watch': {
+        type: oneOf(String, Boolean),
+        description: 'Watch for changes and rebuild as needed',
+      },
+      '--poll': {
+        type: Boolean,
+        description: 'Use polling instead of filesystem events when watching',
+      },
+      '--content': {
+        type: String,
+        description: 'Content paths to use for removing unused classes',
+      },
+      '--purge': {
+        type: String,
+        deprecated: true,
+      },
+      '--postcss': {
+        type: oneOf(String, Boolean),
+        description: 'Load custom PostCSS configuration',
+      },
+      '--minify': { type: Boolean, description: 'Minify the output' },
+      '--config': {
+        type: String,
+        description: 'Path to a custom config file',
+      },
+      '--no-autoprefixer': {
+        type: Boolean,
+        description: 'Disable autoprefixer',
+      },
+      '-c': '--config',
+      '-i': '--input',
+      '-o': '--output',
+      '-m': '--minify',
+      '-w': '--watch',
+      '-p': '--poll',
+    },
+  },
+}
+
+let sharedFlags = {
+  '--help': { type: Boolean, description: 'Display usage information' },
+  '-h': '--help',
+}
+
+if (
+  process.stdout.isTTY /* Detect redirecting output to a file */ &&
+  (process.argv[2] === undefined ||
+    process.argv.slice(2).every((flag) => sharedFlags[flag] !== undefined))
+) {
+  help({
+    usage: [
+      'tailwindcss [--input input.css] [--output output.css] [--watch] [options...]',
+      'tailwindcss init [--full] [--postcss] [options...]',
+    ],
+    commands: Object.keys(commands)
+      .filter((command) => command !== 'build')
+      .map((command) => `${command} [options]`),
+    options: { ...commands.build.args, ...sharedFlags },
+  })
+  process.exit(0)
+}
+
+let command = ((arg = '') => (arg.startsWith('-') ? undefined : arg))(process.argv[2]) || 'build'
+
+if (commands[command] === undefined) {
+  if (fs.existsSync(path.resolve(command))) {
+    // TODO: Deprecate this in future versions
+    // Check if non-existing command, might be a file.
+    command = 'build'
+  } else {
+    help({
+      message: `Invalid command: ${command}`,
+      usage: ['tailwindcss <command> [options]'],
+      commands: Object.keys(commands)
+        .filter((command) => command !== 'build')
+        .map((command) => `${command} [options]`),
+      options: sharedFlags,
+    })
+    process.exit(1)
+  }
+}
+
+// Execute command
+let { args: flags, run } = commands[command]
+let args = (() => {
+  try {
+    let result = arg(
+      Object.fromEntries(
+        Object.entries({ ...flags, ...sharedFlags })
+          .filter(([_key, value]) => !value?.type?.manualParsing)
+          .map(([key, value]) => [key, typeof value === 'object' ? value.type : value])
+      ),
+      { permissive: true }
+    )
+
+    // Manual parsing of flags to allow for special flags like oneOf(Boolean, String)
+    for (let i = result['_'].length - 1; i >= 0; --i) {
+      let flag = result['_'][i]
+      if (!flag.startsWith('-')) continue
+
+      let [flagName, flagValue] = flag.split('=')
+      let handler = flags[flagName]
+
+      // Resolve flagName & handler
+      while (typeof handler === 'string') {
+        flagName = handler
+        handler = flags[handler]
+      }
+
+      if (!handler) continue
+
+      let args = []
+      let offset = i + 1
+
+      // --flag value syntax was used so we need to pull `value` from `args`
+      if (flagValue === undefined) {
+        // Parse args for current flag
+        while (result['_'][offset] && !result['_'][offset].startsWith('-')) {
+          args.push(result['_'][offset++])
+        }
+
+        // Cleanup manually parsed flags + args
+        result['_'].splice(i, 1 + args.length)
+
+        // No args were provided, use default value defined in handler
+        // One arg was provided, use that directly
+        // Multiple args were provided so pass them all in an array
+        flagValue = args.length === 0 ? undefined : args.length === 1 ? args[0] : args
+      } else {
+        // Remove the whole flag from the args array
+        result['_'].splice(i, 1)
+      }
+
+      // Set the resolved value in the `result` object
+      result[flagName] = handler.type(flagValue, flagName)
     }
 
-    if (tok.isPadded) {
-      zeros = padZeros(max, tok, options);
+    // Ensure that the `command` is always the first argument in the `args`.
+    // This is important so that we don't have to check if a default command
+    // (build) was used or not from within each plugin.
+    //
+    // E.g.: tailwindcss input.css -> _: ['build', 'input.css']
+    // E.g.: tailwindcss build input.css -> _: ['build', 'input.css']
+    if (result['_'][0] !== command) {
+      result['_'].unshift(command)
     }
 
-    obj.string = zeros + obj.pattern + toQuantifier(obj.count);
-    tokens.push(obj);
-    start = max + 1;
-    prev = obj;
-  }
-
-  return tokens;
-}
-
-function filterPatterns(arr, comparison, prefix, intersection, options) {
-  let result = [];
-
-  for (let ele of arr) {
-    let { string } = ele;
-
-    // only push if _both_ are negative...
-    if (!intersection && !contains(comparison, 'string', string)) {
-      result.push(prefix + string);
+    return result
+  } catch (err) {
+    if (err.code === 'ARG_UNKNOWN_OPTION') {
+      help({
+        message: err.message,
+        usage: ['tailwindcss <command> [options]'],
+        options: sharedFlags,
+      })
+      process.exit(1)
     }
-
-    // or _both_ are positive
-    if (intersection && contains(comparison, 'string', string)) {
-      result.push(prefix + string);
-    }
+    throw err
   }
-  return result;
+})()
+
+if (args['--help']) {
+  help({
+    options: { ...flags, ...sharedFlags },
+    usage: [`tailwindcss ${command} [options]`],
+  })
+  process.exit(0)
 }
 
-/**
- * Zip strings
- */
-
-function zip(a, b) {
-  let arr = [];
-  for (let i = 0; i < a.length; i++) arr.push([a[i], b[i]]);
-  return arr;
-}
-
-function compare(a, b) {
-  return a > b ? 1 : b > a ? -1 : 0;
-}
-
-function contains(arr, key, val) {
-  return arr.some(ele => ele[key] === val);
-}
-
-function countNines(min, len) {
-  return Number(String(min).slice(0, -len) + '9'.repeat(len));
-}
-
-function countZeros(integer, zeros) {
-  return integer - (integer % Math.pow(10, zeros));
-}
-
-function toQuantifier(digits) {
-  let [start = 0, stop = ''] = digits;
-  if (stop || start > 1) {
-    return `{${start + (stop ? ',' + stop : '')}}`;
-  }
-  return '';
-}
-
-function toCharacterClass(a, b, options) {
-  return `[${a}${(b - a === 1) ? '' : '-'}${b}]`;
-}
-
-function hasPadding(str) {
-  return /^-?(0+)\d/.test(str);
-}
-
-function padZeros(value, tok, options) {
-  if (!tok.isPadded) {
-    return value;
-  }
-
-  let diff = Math.abs(tok.maxLen - String(value).length);
-  let relax = options.relaxZeros !== false;
-
-  switch (diff) {
-    case 0:
-      return '';
-    case 1:
-      return relax ? '0?' : '0';
-    case 2:
-      return relax ? '0{0,2}' : '00';
-    default: {
-      return relax ? `0{0,${diff}}` : `0{${diff}}`;
-    }
-  }
-}
-
-/**
- * Cache
- */
-
-toRegexRange.cache = {};
-toRegexRange.clearCache = () => (toRegexRange.cache = {});
-
-/**
- * Expose `toRegexRange`
- */
-
-module.exports = toRegexRange;
+run(args)
